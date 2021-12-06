@@ -31,13 +31,18 @@ public class PlayerUnitHandler : MonoBehaviour
         ClickToMove();
         DeselectUnit();
     }
+    
+    private void OnGUI()
+    {
+        if(currentUnits.Count != 0) GUI.TextArea(new Rect(0, 0, 200, 50), "Unit Selected: " + currentUnits[0].name);
+    }
 
 
     private void ClickToMove()
     {
         if (currentUnits.Count == 0) return;
         
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(1)) 
         {
             RaycastHit hit;
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100f, groundLayerMask);
@@ -53,7 +58,7 @@ public class PlayerUnitHandler : MonoBehaviour
     }
     private void DeselectUnit()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             currentUnits.Clear();
         }
